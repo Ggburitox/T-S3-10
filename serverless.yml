@@ -1,0 +1,51 @@
+org: thiagorm
+service: api-alumnos
+
+provider:
+  name: aws
+  runtime: python3.12
+  timeout: 30  
+  iam:
+    role: arn:aws:iam::264641143307:role/LabRole
+
+functions:
+  listar:
+    handler: ListarAlumnos.lambda_handler
+    events:
+      - http:
+          path: /alumnos/listar
+          method: post
+          cors: true
+          integration: lambda
+  crear:
+    handler: CrearAlumno.lambda_handler
+    events:
+      - http:
+          path: /alumnos/crear
+          method: post
+          cors: true
+          integration: lambda
+  BuscarAlumno:
+    handler: BuscarAlumno.lambda_handler
+    events:
+      - http:
+          path: /alumnos/buscar
+          method: get
+          cors: true
+          integration: lambda
+  EliminarAlumno:
+    handler: EliminarAlumno.lambda_handler
+    events:
+      - http:
+          path: /alumnos/eliminar
+          method: delete
+          cors: true
+          integration: lambda
+  ModificarAlumno:
+    handler: ModificarAlumno.lambda_handler
+    events:
+      - http:
+          path: /alumnos/modificar
+          method: put
+          cors: true
+          integration: lambda
